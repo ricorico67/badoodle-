@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>a question for you 🩷</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;1,9..144,500;1,9..144,600&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pink-bg-1: #FFE9F1;
+    --pink-bg-2: #FFF3F7;
+    --pink-bg-3: #FDE0EC;
+    --plum: #6B3F55;
+    --pink: #FF9DBB;
+    --pink-deep: #FF6FA0;
+    --pink-soft: #FFD1E3;
+    --white: #FFFDFE;
+    --gold: #FFC978;
+  }
+
+  *{ box-sizing: border-box; }
+
+  html, body{
+    margin:0;
+    padding:0;
+    min-height:100vh;
+  }
+
+  body{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    min-height:100vh;
+    padding: 32px 20px;
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'Quicksand', sans-serif;
+    color: var(--plum);
+    background: linear-gradient(160deg, var(--pink-bg-1) 0%, var(--pink-bg-2) 45%, var(--pink-bg-3) 100%);
+    background-attachment: fixed;
+  }
+
+  /* floating ambient bits: hearts + sparkles */
+  .ambient{
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .ambient span{
+    position:absolute;
+    bottom: -10%;
+    animation: float-up linear infinite;
+  }
+  .ambient span.heart{
+    color: var(--pink-deep);
+    text-shadow: 0 0 8px rgba(255,111,160,0.35);
+  }
+  .ambient span.sparkle{
+    color: var(--gold);
+    animation-name: twinkle-up;
+  }
+  @keyframes float-up{
+    0%{ transform: translateY(0) rotate(0deg); opacity:0; }
+    10%{ opacity: 0.5; }
+    90%{ opacity: 0.5; }
+    100%{ transform: translateY(-120vh) rotate(25deg); opacity: 0; }
+  }
+  @keyframes twinkle-up{
+    0%{ transform: translateY(0) scale(0.6) rotate(0deg); opacity:0; }
+    15%{ opacity: 0.9; }
+    50%{ transform: translateY(-55vh) scale(1.1) rotate(90deg); }
+    85%{ opacity: 0.7; }
+    100%{ transform: translateY(-120vh) scale(0.7) rotate(180deg); opacity: 0; }
+  }
+
+  .card{
+    position: relative;
+    z-index: 1;
+    max-width: 460px;
+    width: 100%;
+    text-align: center;
+    background: var(--white);
+    border-radius: 32px;
+    padding: 52px 36px 40px;
+    box-shadow:
+      0 20px 50px rgba(255, 111, 160, 0.22),
+      0 2px 0 rgba(255,255,255,0.8) inset;
+    border: 2px solid var(--pink-soft);
+    animation: card-in 0.5s cubic-bezier(.25,1.4,.4,1);
+  }
+  @keyframes card-in{
+    0%{ transform: scale(0.9) translateY(10px); opacity: 0; }
+    100%{ transform: scale(1) translateY(0); opacity: 1; }
+  }
+
+  .topper{
+    font-size: 30px;
+    margin-bottom: 6px;
+    display: inline-block;
+    animation: bob 2.4s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0) rotate(-8deg); }
+    50%{ transform: translateY(-6px) rotate(8deg); }
+  }
+
+  h1{
+    animation: text-wobble 5s ease-in-out infinite;
+    display: inline-block;
+  }
+  @keyframes text-wobble{
+    0%, 100%{ transform: rotate(0deg); }
+    50%{ transform: rotate(-0.6deg); }
+  }
+
+  .card{
+    animation: card-in 0.5s cubic-bezier(.25,1.4,.4,1);
+  }
+  .card.jiggle #stage{
+    animation: jiggle-in 0.5s cubic-bezier(.36,1.6,.4,1);
+  }
+  @keyframes jiggle-in{
+    0%{ transform: scale(0.85) rotate(-3deg); opacity: 0.4; }
+    45%{ transform: scale(1.05) rotate(2deg); opacity: 1; }
+    70%{ transform: scale(0.98) rotate(-1deg); }
+    100%{ transform: scale(1) rotate(0deg); }
+  }
+
+  .eyebrow{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    margin: 6px 0 16px;
+  }
+
+  h1{
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(26px, 6vw, 38px);
+    line-height: 1.3;
+    margin: 0 0 12px;
+    color: var(--plum);
+  }
+
+  p.sub{
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: rgba(107,63,85,0.7);
+    margin: 0 0 34px;
+  }
+
+  .buttons{
+    display:flex;
+    gap: 14px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    min-height: 90px;
+  }
+
+  button{
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    border-radius: 100px;
+    cursor: pointer;
+    padding: 14px 32px;
+    transition: box-shadow 0.2s ease, padding 0.2s ease, font-size 0.2s ease, background 0.2s ease;
+    animation: idle-wobble 3.6s ease-in-out infinite;
+    transform-origin: 50% 80%;
+  }
+  .no{ animation-delay: 0.5s; }
+
+  @keyframes idle-wobble{
+    0%, 100%{ transform: rotate(0deg) scale(1); }
+    20%{ transform: rotate(-2.5deg) scale(1.01); }
+    40%{ transform: rotate(2deg) scale(0.99); }
+    60%{ transform: rotate(-1.5deg) scale(1.01); }
+    80%{ transform: rotate(1deg) scale(1); }
+  }
+
+  .yes{
+    background: linear-gradient(135deg, var(--pink-deep), var(--pink));
+    color: var(--white);
+    border: none;
+    box-shadow: 0 8px 20px rgba(255, 111, 160, 0.45);
+  }
+  .yes:hover{
+    animation: none;
+    transform: translateY(-3px) rotate(-3deg) scale(1.08);
+    box-shadow: 0 12px 26px rgba(255, 111, 160, 0.55);
+  }
+  .yes:active{ animation: none; transform: translateY(0) scale(0.94) rotate(2deg); }
+
+  .no{
+    background: var(--white);
+    color: var(--plum);
+    border: 2px solid var(--pink-soft);
+  }
+  .no:hover{
+    animation: wiggle 0.4s ease;
+    border-color: var(--pink);
+  }
+  .no:active{ transform: scale(0.9) rotate(-8deg); }
+  @keyframes wiggle{
+    0%,100%{ transform: rotate(0deg) scale(1); }
+    25%{ transform: rotate(-10deg) scale(1.05); }
+    50%{ transform: rotate(8deg) scale(0.97); }
+    75%{ transform: rotate(-6deg) scale(1.03); }
+  }
+
+  #stage{ display:flex; flex-direction:column; align-items:center; justify-content:center; }
+
+  .count{
+    margin-top: 20px;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: rgba(107,63,85,0.4);
+    min-height: 18px;
+  }
+
+  /* final screen */
+  .final h1{
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(30px, 7vw, 46px);
+    background: linear-gradient(135deg, var(--pink-deep), #FF8FB8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .final .sub{
+    font-size: 17px;
+    color: var(--plum);
+    font-weight: 500;
+  }
+  .ring{
+    font-size: 52px;
+    margin-bottom: 4px;
+    display:inline-block;
+    animation: pop 0.7s cubic-bezier(.25,1.6,.4,1), bob 2.6s ease-in-out 0.7s infinite;
+  }
+  @keyframes pop{
+    0%{ transform: scale(0) rotate(-20deg); opacity:0; }
+    60%{ transform: scale(1.2) rotate(8deg); opacity:1; }
+    100%{ transform: scale(1) rotate(0deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .ambient span, .topper, .ring{ animation: none; }
+    .card{ animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient" id="ambient"></div>
+
+<div class="card" id="card">
+  <div id="stage"></div>
+</div>
+
+<script>
+  const stage = document.getElementById('stage');
+  const card = document.getElementById('card');
+
+  function jiggle(){
+    card.classList.remove('jiggle');
+    void card.offsetWidth; // restart animation
+    card.classList.add('jiggle');
+  }
+
+  const nudges = [
+    "okay, fair. let me ask again though 🩷",
+    "i'll just keep asking, you know 🌸",
+    "take your time, i've got nowhere to be ✨",
+    "still just the two options here 🩷",
+    "i have a feeling about this one 💭",
+    "this button isn't going anywhere either 🌷",
+    "one of these is definitely the right answer 🩷",
+    "i'm patient. very, very patient 🥹"
+  ];
+
+  let noCount = 0;
+
+  function renderIntro(){
+    stage.innerHTML = `
+      <span class="topper">🌸</span>
+      <p class="eyebrow">hey you</p>
+      <h1>I love you.<br>Do you love me too?</h1>
+      <p class="sub">just checking, before I ask the real question.</p>
+      <div class="buttons">
+        <button class="yes" id="yesBtn">yes 🩷</button>
+        <button class="no" id="noBtn">no</button>
+      </div>
+      <div class="count"></div>
+    `;
+    document.getElementById('yesBtn').onclick = renderLoop;
+    document.getElementById('noBtn').onclick = renderLoop;
+    jiggle();
+  }
+
+  function renderLoop(){
+    const nudge = noCount === 0
+      ? "there's really only one question that matters 🩷"
+      : nudges[Math.min(noCount - 1, nudges.length - 1)];
+
+    stage.innerHTML = `
+      <span class="topper">💍</span>
+      <p class="eyebrow">okay, real question</p>
+      <h1>Will you marry me?</h1>
+      <p class="sub">${nudge}</p>
+      <div class="buttons">
+        <button class="yes" id="yesBtn">yes 🩷</button>
+        <button class="no" id="noBtn">no</button>
+      </div>
+      <div class="count">${noCount > 0 ? "asked " + noCount + (noCount === 1 ? " time" : " times") + " so far 🌷" : ""}</div>
+    `;
+
+    document.getElementById('yesBtn').onclick = renderFinal;
+
+    document.getElementById('noBtn').onclick = () => {
+      noCount++;
+      renderLoop();
+    };
+
+    applyYesGrowth();
+    jiggle();
+  }
+
+  function applyYesGrowth(){
+    const yb = document.getElementById('yesBtn');
+    const nb = document.getElementById('noBtn');
+    if(!yb || !nb) return;
+
+    if(noCount === 0){
+      yb.style.cssText = '';
+      yb.className = 'yes';
+      nb.style.cssText = '';
+      return;
+    }
+
+    // steps from 1 up to 9, where 9 = fully covers the screen
+    const step = Math.min(noCount, 9);
+    const widthVmin = 22 + step * 21;   // grows to ~211vmin
+    const heightVmin = 10 + step * 9;   // grows to ~91vmin
+    const fontVmin = 3 + step * 1.8;
+
+    yb.style.position = 'fixed';
+    yb.style.left = '50%';
+    yb.style.top = '50%';
+    yb.style.transform = 'translate(-50%, -50%)';
+    yb.style.width = widthVmin + 'vmin';
+    yb.style.height = heightVmin + 'vmin';
+    yb.style.fontSize = 'min(' + fontVmin + 'vmin, 9vw)';
+    yb.style.padding = '0';
+    yb.style.display = 'flex';
+    yb.style.alignItems = 'center';
+    yb.style.justifyContent = 'center';
+    yb.style.textAlign = 'center';
+    yb.style.lineHeight = '1.1';
+    yb.style.zIndex = '500';
+    yb.style.animation = 'none';
+    yb.style.borderRadius = step >= 6 ? '48px' : '100px';
+    yb.style.transition = 'width 0.5s cubic-bezier(.34,1.56,.64,1), height 0.5s cubic-bezier(.34,1.56,.64,1), font-size 0.5s ease, border-radius 0.5s ease';
+
+    // keep "no" small, floaty, and still reachable above the growing yes button
+    const shrink = Math.min(noCount * 2, 20);
+    nb.style.position = 'relative';
+    nb.style.zIndex = '600';
+    nb.style.padding = Math.max(14 - shrink * 0.4, 4) + 'px ' + Math.max(32 - shrink, 10) + 'px';
+    nb.style.fontSize = Math.max(16 - shrink * 0.25, 9) + 'px';
+  }
+
+  function renderFinal(){
+    stage.parentElement.classList.add('final');
+    stage.innerHTML = `
+      <span class="ring">💍</span>
+      <h1>yayyyyy!</h1>
+      <p class="sub">i love you so much, let's get married.<br>i want to spend every moment with you, my badoodle. 🩷</p>
+    `;
+    jiggle();
+    burstHearts();
+  }
+
+  function burstHearts(){
+    const ambient = document.getElementById('ambient');
+    const emojis = ['♥','💖','💕','🌸','✨'];
+    for(let i=0;i<32;i++){
+      const s = document.createElement('span');
+      s.className = Math.random() > 0.5 ? 'heart' : 'sparkle';
+      s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      s.style.left = Math.random()*100 + 'vw';
+      s.style.fontSize = (14 + Math.random()*22) + 'px';
+      s.style.animationDuration = (4 + Math.random()*5) + 's';
+      s.style.animationDelay = (Math.random()*1.5) + 's';
+      ambient.appendChild(s);
+    }
+  }
+
+  (function seedAmbient(){
+    const ambient = document.getElementById('ambient');
+    const emojis = ['♥','🌸','✨','💕'];
+    for(let i=0;i<12;i++){
+      const s = document.createElement('span');
+      s.className = Math.random() > 0.5 ? 'heart' : 'sparkle';
+      s.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+      s.style.left = Math.random()*100 + 'vw';
+      s.style.fontSize = (14 + Math.random()*18) + 'px';
+      s.style.animationDuration = (9 + Math.random()*6) + 's';
+      s.style.animationDelay = (Math.random()*10) + 's';
+      ambient.appendChild(s);
+    }
+  })();
+
+  renderIntro();
+</script>
+
+</body>
+</html>
